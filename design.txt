@@ -1,0 +1,9 @@
+TO DO:
+  - populate database data with international address 
+  - implement rest api on raw PHP
+  - create react client to consume the php api
+
+Doing:
+
+Done:
+  - creating database schema and populating querys
