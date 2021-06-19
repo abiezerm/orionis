@@ -24,7 +24,17 @@ if (isset($ENV['ENVIRONMENT']) && $_ENV['ENVIRONMENT'] === 'production') {
   ));
 }
 
-var_dump(App::get('database'));
+
+App::bind('validRoute', false);
+
+require 'app/Routes.php';
+
+if (!App::get('validRoute')) {
+  echo "Invalid Route: {$_SERVER['REQUEST_URI']}";
+}
+
+// var_dump(App::get('database'));
+// var_dump($_GET['url']);
 
 // $stmt = $db->run("SELECT * FROM customer WHERE id = :id", ['id' => 1]);
 // $result = $stmt->fetchAll();
