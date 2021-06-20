@@ -15,3 +15,16 @@ Router::add('/customers/:id', [
   'controller' => 'CustomerController',
   'action' => 'view'
 ]);
+
+
+Router::add('/city', [
+  'method' => 'get',
+  'controller' => 'CityController',
+  'action' => 'index'
+]);
+
+Router::add('/city/:id', [
+  'method' => 'get',
+  'controller' => 'CityController',
+  'action' => 'view'
+]);
