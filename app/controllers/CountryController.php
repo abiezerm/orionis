@@ -33,7 +33,6 @@ class CountryController extends Controller {
     }
   }
 
-  
   public function getStates($id) {
     $countryData = $this->countryModel->find($id);
     $response = [];

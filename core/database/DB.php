@@ -22,6 +22,10 @@ class DB {
     }
   }
 
+  public function __call($method, $args) {
+    return call_user_func_array(array($this->pdo, $method), $args);
+  }
+
   public function run($sql, $args = NULL) {
     if (!$args) {
       return $this->pdo->query($sql);

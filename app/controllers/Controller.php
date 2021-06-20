@@ -12,7 +12,7 @@ class Controller {
   }
 
   protected function getJSONBodyData() {
-    $jsonData = json_encode(file_get_contents('php://input', true));
+    $jsonData = json_decode(file_get_contents('php://input'), true);
     return $jsonData;
   }
 

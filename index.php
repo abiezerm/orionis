@@ -27,6 +27,7 @@ if (isset($ENV['ENVIRONMENT']) && $_ENV['ENVIRONMENT'] === 'production') {
 
 App::bind('validRoute', false);
 
+require 'app/cors.php';
 require 'app/Routes.php';
 
 if (!App::get('validRoute')) {

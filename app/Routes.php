@@ -16,6 +16,12 @@ Router::add('/customers/:id', [
   'action' => 'view'
 ]);
 
+Router::add('/customers', [
+  'method' => 'post',
+  'controller' => 'CustomerController',
+  'action' => 'add'
+]);
+
 Router::add('/addresses', [
   'method' => 'get',
   'controller' => 'AddressController',
