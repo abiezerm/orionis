@@ -49,6 +49,31 @@ class CustomerController extends Controller {
     }
   }
 
+  public function edit($id) {
+    $putData = $this->getJSONBodyData();
+
+    if ($this->validateEntity($putData)) {
+      $rowCount = $this->customerModel->update($id, [
+        'firstname' => $putData['firstname'],
+        'lastname'  => $putData['lastname'],
+        'email'     => $putData['email'],
+        'phone'     => $putData['phone'],
+        'gender'    => $putData['gender'],
+        'birthdate' => $putData['birthdate']
+      ]); 
+
+      $data = $this->customerModel->find($id);
+
+      if ($data) {
+        $this->jsonResponse($data);
+      } else {
+        $this->notFoundJsonResponse();
+      }
+    } else {
+      $this->invalidInputJsonResponse();
+    }
+  }
+
   public function validateEntity($input) {
     if (empty($input['firstname'])) {
       return false;

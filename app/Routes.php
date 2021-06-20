@@ -10,16 +10,22 @@ Router::add('/customers', [
   'action' => 'index'
 ]);
 
+Router::add('/customers', [
+  'method' => 'post',
+  'controller' => 'CustomerController',
+  'action' => 'add'
+]);
+
 Router::add('/customers/:id', [
   'method' => 'get',
   'controller' => 'CustomerController',
   'action' => 'view'
 ]);
 
-Router::add('/customers', [
-  'method' => 'post',
+Router::add('/customers/:id', [
+  'method' => 'put',
   'controller' => 'CustomerController',
-  'action' => 'add'
+  'action' => 'edit'
 ]);
 
 Router::add('/addresses', [

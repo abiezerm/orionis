@@ -1,11 +1,14 @@
 <?php
 namespace App\Models;
+use Core\Helpers\QueryHelper;
 
 class Customer {
   protected $db;
+  protected $queryHelper;
 
   public function __construct($db) {
     $this->db = $db;
+    $this->queryHelper = new QueryHelper();
   }
 
   public function findAll() {
@@ -32,5 +35,24 @@ class Customer {
     ]);
 
     return $this->db->lastInsertId('customer_id_seq');
+  }
+
+  public function update($id, $data) {
+    $allowed = [
+      'firstname',
+      'lastname',
+      'email',
+      'phone',
+      'birthdate',
+      'gender',
+    ];
+
+    $dynamicQuery = $this->queryHelper->getDynamicUpdateQuery('customer', $id, $data, $allowed);
+    $query = $dynamicQuery['sql'];
+    $params = $dynamicQuery['params'];
+
+    $stmt = $this->db->run($query, $params);
+    
+    return $stmt->rowCount();
   }
 }
