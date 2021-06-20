@@ -40,10 +40,32 @@ Router::add('/addresses', [
   'action' => 'index'
 ]);
 
+
+Router::add('/addresses', [
+  'method' => 'post',
+  'controller' => 'AddressController',
+  'action' => 'add'
+]);
+
 Router::add('/addresses/:id', [
   'method' => 'get',
   'controller' => 'AddressController',
   'action' => 'view'
+]);
+
+
+
+Router::add('/addresses/:id', [
+  'method' => 'put',
+  'controller' => 'AddressController',
+  'action' => 'edit'
+]);
+
+
+Router::add('/addresses/:id', [
+  'method' => 'delete',
+  'controller' => 'AddressController',
+  'action' => 'delete'
 ]);
 
 Router::add('/countries', [
