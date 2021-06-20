@@ -23,7 +23,7 @@ class Customer {
 
   public function insert($data) {
     $stmt = $this->db->run(<<<SQL
-      INSERT INTO customer(firstname, lastname, email, phone, gender, birthdate) 
+      INSERT INTO customer (firstname, lastname, email, phone, gender, birthdate) 
       VALUES (:firstname, :lastname, :email, :phone, :gender, :birthdate)
     SQL, [
       'firstname' => $data['firstname'],
@@ -35,6 +35,13 @@ class Customer {
     ]);
 
     return $this->db->lastInsertId('customer_id_seq');
+  }
+
+  // insert an specific address to an specific customer
+  public function insertAddress($customerId, $addressId) {
+    $stmt = $this->db->run(
+      'INSERT INTO customer_address (customer_id, address_id) VALUES (:customerId, :addressId)',
+      ['customerId' => $customerId, 'addressId' =>$addressId]);
   }
 
   public function update($id, $data) {

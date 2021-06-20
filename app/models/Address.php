@@ -26,12 +26,12 @@ class Address {
       INSERT INTO address (address_line1, address_line2, country_id, state_id, city_id, zipcode)
       VALUES (:address_line1, :address_line2, :country_id, :state_id, :city_id, :zipcode);
     SQL, [
-      ':address_line1' => $data['addressLine1'],
-      ':address_line2' => $data['addressLine2'],
-      ':country_id' => $data['countryId'],
-      ':state_id' => $data['stateId'],
-      ':city_id' => $data['cityId'],
-      ':zipcode' => $data['zipcode']
+      'address_line1' => $data['addressLine1'],
+      'address_line2' => $data['addressLine2'],
+      'country_id' => $data['countryId'],
+      'state_id' => $data['stateId'],
+      'city_id' => $data['cityId'],
+      'zipcode' => $data['zipcode']
     ]);
 
     return $this->db->lastInsertId('address_id_seq');

@@ -1,5 +1,7 @@
+use orionis;
 select * from customer;
 SELECT * from address;
+select * from state;
 select * from city;
 SELECT * FROM customer_address;
 
