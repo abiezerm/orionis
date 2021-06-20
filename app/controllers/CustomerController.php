@@ -13,7 +13,7 @@ class CustomerController extends Controller {
   }
 
   public function index() {
-    var_dump('Customer Controller Index');
+
   }
 
   public function view($id) {
