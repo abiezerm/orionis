@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Customer {
+class Address {
   protected $db;
 
   public function __construct($db) {
@@ -9,12 +9,12 @@ class Customer {
   }
 
   public function findAll() {
-    $stmt = $this->db->run('SELECT * FROM customer');
+    $stmt = $this->db->run('SELECT * FROM address');
     return $stmt->fetchAll();
   }
 
   public function findById($id) {
-    $stmt = $this->db->run('SELECT * FROM customer where id = :id', ['id' => $id]);
+    $stmt = $this->db->run('SELECT * FROM address where id = :id', ['id' => $id]);
     return $stmt->fetch();
   }
 }

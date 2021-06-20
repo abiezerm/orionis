@@ -16,6 +16,18 @@ Router::add('/customers/:id', [
   'action' => 'view'
 ]);
 
+Router::add('/addresses', [
+  'method' => 'get',
+  'controller' => 'AddressController',
+  'action' => 'index'
+]);
+
+Router::add('/addresses/:id', [
+  'method' => 'get',
+  'controller' => 'AddressController',
+  'action' => 'view'
+]);
+
 Router::add('/countries', [
   'method' => 'get',
   'controller' => 'CountryController',

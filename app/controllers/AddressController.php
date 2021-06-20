@@ -3,17 +3,17 @@ namespace App\Controllers;
 use App\Models;
 use Core\App;
 
-class CustomerController extends Controller {
-  private $customerModel;
+class AddressController extends Controller {
+  private $addressModel;
 
   public function __construct($db = NULL)
   { 
     $this->db = $db;
-    $this->customerModel = new Models\Customer($this->db);
+    $this->addressModel = new Models\Address($this->db);
   }
 
   public function index() {
-    $data = $this->customerModel->findAll();
+    $data = $this->addressModel->findAll();
     $response = [
       'data' => $data
     ];
@@ -21,7 +21,7 @@ class CustomerController extends Controller {
   }
 
   public function view($id) {
-    $data = $this->customerModel->findById($id);
+    $data = $this->addressModel->findById($id);
     if ($data) {
       $this->jsonResponse($data);
     } else {
