@@ -106,15 +106,16 @@ Router::add('/states/:id/cities', [
 ]);
 
 
-Router::add('/cities', [
-  'method' => 'get',
-  'controller' => 'CityController',
-  'action' => 'index'
-]);
+// cities will not be used, it is a simple varchar field instead on the address table
+// Router::add('/cities', [
+//   'method' => 'get',
+//   'controller' => 'CityController',
+//   'action' => 'index'
+// ]);
 
-Router::add('/cities/:id', [
-  'method' => 'get',
-  'controller' => 'CityController',
-  'action' => 'view'
-]);
+// Router::add('/cities/:id', [
+//   'method' => 'get',
+//   'controller' => 'CityController',
+//   'action' => 'view'
+// ]);
 

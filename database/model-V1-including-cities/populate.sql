@@ -5,7 +5,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE customer;
 TRUNCATE TABLE country;
 TRUNCATE TABLE state;
--- TRUNCATE TABLE city;
+TRUNCATE TABLE city;
 TRUNCATE TABLE address;
 TRUNCATE TABLE customer_address;
 SET FOREIGN_KEY_CHECKS = 1;
@@ -22,6 +22,8 @@ VALUES ('Heidy', 'Rosario', 'heidyr@test.com', '8093809780', 'U', '1980-01-01');
 
 
 -- countries
+
+
 INSERT INTO country(name, code) VALUES ("Afghanistan", 'AF');
 INSERT INTO country(name, code) VALUES ("Åland Islands", 'AX');
 INSERT INTO country(name, code) VALUES ("Albania", 'AL');
@@ -270,99 +272,28 @@ INSERT INTO country(name, code) VALUES ("Zimbabwe", 'ZW');
 -- STATE OR Provinces
 
 -- USA
-INSERT INTO state(name, code, country_id) VALUES ("Alabama", 'AL', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Alaska", 'AK', 230);
-INSERT INTO state(name, code, country_id) VALUES ("American Samoa", 'AS', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Arizona", 'AZ', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Arkansas", 'AR', 230);
-INSERT INTO state(name, code, country_id) VALUES ("California", 'CA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Colorado", 'CO', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Connecticut", 'CT', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Delaware", 'DE', 230);
-INSERT INTO state(name, code, country_id) VALUES ("District Of Columbia", 'DC', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Federated States Of Micronesia", 'FM', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Florida", 'FL', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Georgia", 'GA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Guam", 'GU', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Hawaii", 'HI', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Idaho", 'ID', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Illinois", 'IL', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Indiana", 'IN', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Iowa", 'IA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Kansas", 'KS', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Kentucky", 'KY', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Louisiana", 'LA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Maine", 'ME', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Marshall Islands", 'MH', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Maryland", 'MD', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Massachusetts", 'MA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Michigan", 'MI', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Minnesota", 'MN', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Mississippi", 'MS', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Missouri", 'MO', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Montana", 'MT', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Nebraska", 'NE', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Nevada", 'NV', 230);
-INSERT INTO state(name, code, country_id) VALUES ("New Hampshire", 'NH', 230);
-INSERT INTO state(name, code, country_id) VALUES ("New Jersey", 'NJ', 230);
-INSERT INTO state(name, code, country_id) VALUES ("New Mexico", 'NM', 230);
-INSERT INTO state(name, code, country_id) VALUES ("New York", 'NY', 230);
-INSERT INTO state(name, code, country_id) VALUES ("North Carolina", 'NC', 230);
-INSERT INTO state(name, code, country_id) VALUES ("North Dakota", 'ND', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Northern Mariana Islands", 'MP', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Ohio", 'OH', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Oklahoma", 'OK', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Oregon", 'OR', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Palau", 'PW', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Pennsylvania", 'PA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Puerto Rico", 'PR', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Rhode Island", 'RI', 230);
-INSERT INTO state(name, code, country_id) VALUES ("South Carolina", 'SC', 230);
-INSERT INTO state(name, code, country_id) VALUES ("South Dakota", 'SD', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Tennessee", 'TN', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Texas", 'TX', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Utah", 'UT', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Vermont", 'VT', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Virgin Islands", 'VI', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Virginia", 'VA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Washington", 'WA', 230);
-INSERT INTO state(name, code, country_id) VALUES ("West Virginia", 'WV', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Wisconsin", 'WI', 230);
-INSERT INTO state(name, code, country_id) VALUES ("Wyoming", 'WY', 230); 
-
--- Canada
-
-INSERT INTO state(name, code, country_id) VALUES ("Alberta", 'AB', 39);
-INSERT INTO state(name, code, country_id) VALUES ("British Columbia", 'BC', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Manitoba", 'MB', 39);
-INSERT INTO state(name, code, country_id) VALUES ("New Brunswick", 'NB', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Newfoundland and Labrador", 'NL', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Northwest Territories", 'NT', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Nova Scotia", 'NS', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Nunavut", 'NU', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Ontario", 'ON', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Prince Edward Island", 'PE', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Quebec", 'QC', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Saskatchewan", 'SK', 39);
-INSERT INTO state(name, code, country_id) VALUES ("Yukon Territory", 'YT', 39); 
+INSERT INTO state (name, code, country_id) VALUES ('Alabama', 'AL', 2);
+INSERT INTO state (name, code, country_id) VALUES ('Florida', 'FL', 2);
 
 
--- city (deprecated)
+-- city
+
 -- Alabama
--- INSERT INTO city (name, state_id) VALUES ('Madison', 1); 
--- INSERT INTO city (name, state_id) VALUES ('Florence', 1); 
+INSERT INTO city (name, state_id) VALUES ('Madison', 1); 
+INSERT INTO city (name, state_id) VALUES ('Florence', 1); 
 
 -- Florida
--- INSERT INTO city (name, state_id) VALUES ('Doral', 2); 
--- INSERT INTO city (name, state_id) VALUES ('Miami', 2); 
+INSERT INTO city (name, state_id) VALUES ('Doral', 2); 
+INSERT INTO city (name, state_id) VALUES ('Miami', 2); 
 
 
 -- address
-INSERT INTO address (address_line1, address_line2, country_id, state_id, city, zipcode)
-VALUES ('8400 N.W. 25th Street', 'SUITE 101', 230, 12, 'Doral', '33198');
 
-INSERT INTO address (address_line1, address_line2, country_id, state_id, city, zipcode)
-VALUES ('8540 NW 66 Street', 'SUITE 102', 230, 12, 'Miami', '33195');
+INSERT INTO address (address_line1, address_line2, country_id, state_id, city_id, zipcode)
+VALUES ('8400 N.W. 25th Street', 'SUITE 101', 2, 2, 3, '33198');
+
+INSERT INTO address (address_line1, address_line2, country_id, state_id, city_id, zipcode)
+VALUES ('8540 NW 66 Street', 'SUITE 102', 2, 2, 4, '33195');
 
 
 -- customer_address pivot table

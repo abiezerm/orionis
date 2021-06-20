@@ -23,14 +23,14 @@ class Address {
 
   public function insert($data) {
     $stmt = $this->db->run(<<<SQL
-      INSERT INTO address (address_line1, address_line2, country_id, state_id, city_id, zipcode)
-      VALUES (:address_line1, :address_line2, :country_id, :state_id, :city_id, :zipcode);
+      INSERT INTO address (address_line1, address_line2, country_id, state_id, city, zipcode)
+      VALUES (:address_line1, :address_line2, :country_id, :state_id, :city, :zipcode);
     SQL, [
       'address_line1' => $data['addressLine1'],
       'address_line2' => $data['addressLine2'],
       'country_id' => $data['countryId'],
       'state_id' => $data['stateId'],
-      'city_id' => $data['cityId'],
+      'city' => $data['city'],
       'zipcode' => $data['zipcode']
     ]);
 
@@ -43,7 +43,7 @@ class Address {
       'address_line2',
       'country_id',
       'state_id',
-      'city_id',
+      'city',
       'zipcode'
     ];
 

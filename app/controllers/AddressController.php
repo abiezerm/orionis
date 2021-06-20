@@ -38,7 +38,7 @@ class AddressController extends Controller {
         'addressLine2' => $_POST['addressLine2'],
         'countryId' => $_POST['countryId'],
         'stateId' => $_POST['stateId'],
-        'cityId' => $_POST['cityId'],
+        'city' => $_POST['city'],
         'zipcode' => $_POST['zipcode']
       ]);
 
@@ -101,7 +101,7 @@ class AddressController extends Controller {
       return false;
     }
 
-    if (empty($input['cityId'])) {
+    if (empty($input['city'])) {
       return false;
     }
 

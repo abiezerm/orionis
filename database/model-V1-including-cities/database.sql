@@ -30,13 +30,13 @@ CREATE TABLE IF NOT EXISTS state (
   FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- we will be used a simple varchar for this instead. it's to complex to maintain the database updated
--- CREATE TABLE IF NOT EXISTS city (
---   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
---   name VARCHAR (100),
---   state_id int,
---   FOREIGN KEY (state_id) REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE
--- );
+
+CREATE TABLE IF NOT EXISTS city (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR (100),
+  state_id int,
+  FOREIGN KEY (state_id) REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 
 CREATE TABLE IF NOT EXISTS address (
@@ -45,11 +45,11 @@ CREATE TABLE IF NOT EXISTS address (
   address_line2 VARCHAR(255),
   country_id int,
   state_id int,
-  city varchar(250), -- city is now a varchar because there are too many cities and keep the database updated is hard for this
+  city_id int,
   zipcode VARCHAR(10),
   FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (state_id) REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE
--- FOREIGN KEY (city_id) REFERENCES city(id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (state_id) REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (city_id) REFERENCES city(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
