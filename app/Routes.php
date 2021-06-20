@@ -16,15 +16,53 @@ Router::add('/customers/:id', [
   'action' => 'view'
 ]);
 
+Router::add('/countries', [
+  'method' => 'get',
+  'controller' => 'CountryController',
+  'action' => 'index'
+]);
 
-Router::add('/city', [
+Router::add('/countries/:id', [
+  'method' => 'get',
+  'controller' => 'CountryController',
+  'action' => 'view'
+]);
+
+Router::add('/countries/:id/states', [
+  'method' => 'get',
+  'controller' => 'CountryController',
+  'action' => 'getStates'
+]);
+
+Router::add('/states', [
+  'method' => 'get',
+  'controller' => 'StateController',
+  'action' => 'index'
+]);
+
+Router::add('/states/:id', [
+  'method' => 'get',
+  'controller' => 'StateController',
+  'action' => 'view'
+]);
+
+
+Router::add('/states/:id/cities', [
+  'method' => 'get',
+  'controller' => 'StateController',
+  'action' => 'getCities'
+]);
+
+
+Router::add('/cities', [
   'method' => 'get',
   'controller' => 'CityController',
   'action' => 'index'
 ]);
 
-Router::add('/city/:id', [
+Router::add('/cities/:id', [
   'method' => 'get',
   'controller' => 'CityController',
   'action' => 'view'
 ]);
+

@@ -18,7 +18,7 @@ class CityController extends Controller {
       'data' => $data
     ];
 
-    $this->jsonResponse($data);
+    $this->jsonResponse($response);
   }
 
   public function view($id) {

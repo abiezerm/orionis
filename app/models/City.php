@@ -17,4 +17,9 @@ class City {
     $stmt = $this->db->run('SELECT * FROM city WHERE id = :id', ['id' => $id]);
     return $stmt->fetch();
   }
+
+  public function findByStateId($id) {
+    $stmt = $this->db->run('SELECT * FROM city WHERE state_id = :state_id', ['state_id' => $id]);
+    return $stmt->fetchAll();
+  }
 }
