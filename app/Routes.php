@@ -28,6 +28,12 @@ Router::add('/customers/:id', [
   'action' => 'edit'
 ]);
 
+Router::add('/customers/:id', [
+  'method' => 'delete',
+  'controller' => 'CustomerController',
+  'action' => 'delete'
+]);
+
 Router::add('/addresses', [
   'method' => 'get',
   'controller' => 'AddressController',

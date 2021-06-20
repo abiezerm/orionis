@@ -55,4 +55,9 @@ class Customer {
     
     return $stmt->rowCount();
   }
+
+  public function delete($id) {
+    $stmt = $this->db->run('DELETE FROM customer WHERE id = :id', ['id' => $id]);
+    return $stmt->rowCount();
+  }
 }

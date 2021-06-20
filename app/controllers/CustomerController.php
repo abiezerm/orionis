@@ -74,6 +74,16 @@ class CustomerController extends Controller {
     }
   }
 
+  public function delete($id) {
+    $rowCount = $this->customerModel->delete($id);
+
+    if ($rowCount > 0) {
+      $this->noContentJsonResponse();
+    } else {
+      $this->notFoundJsonResponse();
+    }
+  }
+
   public function validateEntity($input) {
     if (empty($input['firstname'])) {
       return false;
