@@ -110,7 +110,7 @@ function CustomerCRUD(props) {
   async function handleEditCustomerFormSubmit() {
     if (Object.keys(validateForm(customerForm)).length === 0) {
       const response = await APIUtils.editCustomer(customerForm);
-      console.log(response);
+
       if (!response.error) {
         alert('Record edited succesfully');
         getCustomersData();
@@ -246,6 +246,12 @@ function CustomerCRUD(props) {
       name: 'gender',
       selector: 'gender',
       sortable: true
+    },
+    {
+      cell: (row) => (
+        <Button id={row.id}>Addresses</Button>
+      ),
+      button: true
     },
     {
       cell: (row) => (

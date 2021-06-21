@@ -22,6 +22,11 @@ class CustomerController extends Controller {
 
   public function view($id) {
     $data = $this->customerModel->find($id);
+    $addressesData = $this->customerModel->getAddressByCustomerId($id);
+
+    // adding addresses to the customer data
+    $data['addresses'] = $addressesData;
+    
     if ($data) {
       $this->jsonResponse($data);
     } else {
