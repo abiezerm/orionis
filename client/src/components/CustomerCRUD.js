@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import CustomerForm from './CustomerForm';
 import AddressForm from './AddressForm';
@@ -14,6 +15,10 @@ function CustomerCRUD(props) {
   const [countriesData, setCountriesData] = useState([]);
   const [statesData, setStatesData] = useState([]);  
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [showAddCustomerForm, setShowAddCustomerForm] = useState(false);
+  const [showEditCustomerForm, setShowEditCustomerForm] = useState(false);
+  const [showAddressForm, setShowAddressForm] = useState(false);
 
   const [customerForm, setCustomerForm] = useState({
     firstname: '',
@@ -21,7 +26,7 @@ function CustomerCRUD(props) {
     email: '',
     phone: '',
     birthdate: new Date(),
-    gender: ''
+    gender: 'M'
   });
 
   const [addressForm, setAddressForm] = useState({
@@ -33,16 +38,14 @@ function CustomerCRUD(props) {
     zipcode: ''
   });
 
-  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsError(false);
       setIsLoading(true);
       try {
-        const customersResult = await APIUtils.getCustomers();
+        getCustomersData();
         const countriesResult = await APIUtils.getCountries();
-        setCustomersData(customersResult.data);
         setCountriesData(countriesResult.data);
       } catch (error) {
         setIsError(true);
@@ -61,6 +64,11 @@ function CustomerCRUD(props) {
 
     fetchData();
   }, [addressForm.countryId]);
+
+  async function getCustomersData() {
+    const customersResult = await APIUtils.getCustomers();
+    setCustomersData(customersResult.data);
+  }
   
 
   function handleCustomerFormInputChange(event) {
@@ -83,11 +91,132 @@ function CustomerCRUD(props) {
     console.log('address form submit!');
   }
 
-  function handleCustomerFormSubmit() {
-    console.log('customer submit!');
+  async function handleAddCustomerFormSubmit() {
+    if (Object.keys(validateForm(customerForm)).length === 0) {
+      const response = await APIUtils.addCustomer(customerForm);
+
+      if (!response.error) {
+        alert('Record added succesfully');
+        getCustomersData();
+        clearCustomerForm();
+      } else {
+        alert('Error adding record');
+      }
+    } else {
+      alert('Please fill correctly all the fields');
+    }
+  }
+
+  async function handleEditCustomerFormSubmit() {
+    if (Object.keys(validateForm(customerForm)).length === 0) {
+      const response = await APIUtils.editCustomer(customerForm);
+      console.log(response);
+      if (!response.error) {
+        alert('Record edited succesfully');
+        getCustomersData();
+      } else {
+        alert('Error editing record');
+      }
+    } else {
+      alert('Please fill correctly all the fields');
+    }
+  }
+
+  // handle Datatable action buttons
+  async function handleCustomerDelete(e) {
+    const id = e.target.id;
+    const userConfirmation = window.confirm(`Are you sure you want to delete this record with id: ${id}?`);
+    if (userConfirmation) {
+      const responseStatusCode = await APIUtils.deleteCustomer(id);
+
+      if (responseStatusCode === 204) {
+        // reset datatable
+        getCustomersData();
+      }
+
+      if (responseStatusCode === 404) {
+        alert(`Failed to delete record with id: ${id}, 404 Record not found`);
+      }
+    }
+  }
+
+  async function handleCustomerEdit(e) {
+    const id = e.target.id;
+    const record = await APIUtils.getCustomerById(id);
+
+    // fill form state from the record
+    setCustomerForm({
+      id: record.id,
+      firstname: record.firstname,
+      lastname: record.lastname,
+      email: record.email,
+      phone: record.phone,
+      birthdate: new Date(`${record.birthdate} `),
+      gender: record.gender
+    });
+
+    showCustomerForm('edit');
+  }
+
+  // modal handles
+  function showCustomerForm(action='add') {
+    if (action === 'add') {
+      setShowAddCustomerForm(true);
+    } else {
+      setShowEditCustomerForm(true);
+    }
+  }
+
+  function hideCustomerForm(action='add') {
+    clearCustomerForm();
+    if (action === 'add') {
+      setShowAddCustomerForm(false);
+    } else {
+      setShowEditCustomerForm(false);
+    }
+  }
+
+  function showAddressFormModal() {
+    setShowAddressForm(true);
+  }
+
+  function hideAddressFormModal() {
+    setShowAddressForm(false);
+  }
+
+  function validateForm(form) {
+    const inputs = form;
+    const errors = {};
+
+    for (const key in inputs) {
+      if (key === 'id') continue;
+      
+      if (!inputs[key]) {
+        errors[key] = `${key} cannot be empty`;
+      }
+    }
+    
+    return errors;
+  }
+
+  function clearCustomerForm() {
+    setCustomerForm({
+      id: '',
+      firstname: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      birthdate: new Date(),
+      gender: 'M'
+    });
   }
 
   const customerDatatableColumns = [
+    {
+      name : 'id',
+      selector: 'id',
+      sortable: true
+    },
     {
       name: 'firstname',
       selector: 'firstname',
@@ -118,6 +247,18 @@ function CustomerCRUD(props) {
       selector: 'gender',
       sortable: true
     },
+    {
+      cell: (row) => (
+        <Button id={row.id} onClick={handleCustomerEdit}>Edit</Button>
+      ),
+      button: true
+    },
+    {
+      cell: (row) => (
+        <Button id={row.id} onClick={handleCustomerDelete}>Delete</Button>
+      ),
+      button: true
+    }
   ];
 
   // const data = [{ id: 1, title: 'Conan the Barbarian', year: '1982'},  { id: 1, title: 'War of Somalia', year: '1982'}];
@@ -140,11 +281,32 @@ function CustomerCRUD(props) {
         ? <Spinner animation="border" />
         :
         <>
+          <Button onClick={() => showCustomerForm('add')}>Add new Record</Button>
           <CustomerForm 
+            action='add'
+            show={showAddCustomerForm}
+            onCloseClick={() => hideCustomerForm('add')}
             formValues={customerForm} 
-            onSubmitClick={handleCustomerFormSubmit}
+            onSubmitClick={handleAddCustomerFormSubmit}
             onInputChange={handleCustomerFormInputChange} 
             onDateInputChange={handleCustomerFormDateInputChange} 
+          />
+
+          <CustomerForm 
+            action='edit'
+            show={showEditCustomerForm}
+            onCloseClick={() => hideCustomerForm('edit')}
+            formValues={customerForm} 
+            onSubmitClick={handleEditCustomerFormSubmit}
+            onInputChange={handleCustomerFormInputChange} 
+            onDateInputChange={handleCustomerFormDateInputChange} 
+          />
+
+
+          <Datatable 
+            title="Customers"
+            columns={customerDatatableColumns}
+            data={customersData}
           />
 
           <AddressForm 
@@ -155,11 +317,6 @@ function CustomerCRUD(props) {
             states={statesData}
           />
 
-          <Datatable 
-            title="Customers"
-            columns={customerDatatableColumns}
-            data={customersData}
-          />
           
         </>
       } 

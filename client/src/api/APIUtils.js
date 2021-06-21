@@ -15,6 +15,42 @@ export const getCustomers = async () => {
   return result.data;
 };
 
+export const getCustomerById = async (id) => {
+  const result = await axios(`${API_URL}\\customers\\${id}`);
+  return result.data;
+};
+
+export const addCustomer = async (data) => {
+  const result = await axios.post(`${API_URL}\\customers`, {
+    firstname: data.firstname,
+    lastname: data.lastname,
+    email: data.email,
+    phone: data.phone,
+    gender: data.gender,
+    birthdate: data.birthdate.toISOString().split('T')[0]
+  });
+
+  return result.data;
+}
+
+export const editCustomer = async (data) => {
+  const result = await axios.put(`${API_URL}\\customers\\${data.id}`, {
+    firstname: data.firstname,
+    lastname: data.lastname,
+    email: data.email,
+    phone: data.phone,
+    gender: data.gender,
+    birthdate: data.birthdate.toISOString().split('T')[0]
+  });
+
+  return result.data;
+}
+
+export const deleteCustomer = async (id) => {
+  const result = await axios.delete(`${API_URL}\\customers\\${id}`);
+  return result.status;
+};
+
 export const getCountries = async () => {
   const result  = await axios(`${API_URL}\\countries`);
   return result.data;
