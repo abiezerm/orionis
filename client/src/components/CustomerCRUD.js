@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
 import CustomerForm from './CustomerForm';
+import AddressForm from './AddressForm';
 import * as APIUtils from '../api/APIUtils';
 import Datatable from 'react-data-table-component';
 
 function CustomerCRUD(props) {
   const [customersData, setCustomersData] = useState([]);
+  const [countriesData, setCountriesData] = useState([]);
+  const [statesData, setStatesData] = useState([]);  
   const [isLoading, setIsLoading] = useState(false);
+
   const [customerForm, setCustomerForm] = useState({
     firstname: '',
     lastname: '',
@@ -19,6 +23,16 @@ function CustomerCRUD(props) {
     birthdate: new Date(),
     gender: ''
   });
+
+  const [addressForm, setAddressForm] = useState({
+    addressLine1: '',
+    addressLine2: '',
+    countryId: 230,
+    stateId: '',
+    city: '',
+    zipcode: ''
+  });
+
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -26,9 +40,10 @@ function CustomerCRUD(props) {
       setIsError(false);
       setIsLoading(true);
       try {
-        const result = await APIUtils.getCustomers();
-        setCustomersData(result);
-        console.log(result);
+        const customersResult = await APIUtils.getCustomers();
+        const countriesResult = await APIUtils.getCountries();
+        setCustomersData(customersResult.data);
+        setCountriesData(countriesResult.data);
       } catch (error) {
         setIsError(true);
       }
@@ -38,6 +53,16 @@ function CustomerCRUD(props) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const statesResult = await APIUtils.getStatesByCountryId(addressForm.countryId);
+      setStatesData(statesResult.data);
+    };
+
+    fetchData();
+  }, [addressForm.countryId]);
+  
+
   function handleCustomerFormInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -46,8 +71,16 @@ function CustomerCRUD(props) {
     setCustomerForm(prevState => ({...prevState, [name] : value}));
   }
 
+  function handleAddressFormInputChange(e) {
+    setAddressForm(prevState => ({...prevState, [e.target.name] : e.target.value}));
+  }
+
   function handleCustomerFormDateInputChange(date, name) {
     setCustomerForm(prevState => ({...prevState, [name] : date}));
+  }
+
+  function handleAddressFormSubmit() {
+    console.log('address form submit!');
   }
 
   function handleCustomerFormSubmit() {
@@ -101,8 +134,6 @@ function CustomerCRUD(props) {
   //   },
   // ];
 
-
-  console.log(customersData);
   return (
     <>
       {isLoading
@@ -114,6 +145,14 @@ function CustomerCRUD(props) {
             onSubmitClick={handleCustomerFormSubmit}
             onInputChange={handleCustomerFormInputChange} 
             onDateInputChange={handleCustomerFormDateInputChange} 
+          />
+
+          <AddressForm 
+            formValues={addressForm}
+            onSubmitClick={handleAddressFormSubmit}
+            onInputChange={handleAddressFormInputChange}
+            countries={countriesData}
+            states={statesData}
           />
 
           <Datatable 
@@ -132,4 +171,4 @@ function CustomerCRUD(props) {
 
 export default CustomerCRUD;
 
-CustomerCRUD.propType = {};
+CustomerCRUD.propTypes = {};

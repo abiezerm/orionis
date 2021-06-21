@@ -331,7 +331,6 @@ INSERT INTO state(name, code, country_id) VALUES ("Wisconsin", 'WI', 230);
 INSERT INTO state(name, code, country_id) VALUES ("Wyoming", 'WY', 230); 
 
 -- Canada
-
 INSERT INTO state(name, code, country_id) VALUES ("Alberta", 'AB', 39);
 INSERT INTO state(name, code, country_id) VALUES ("British Columbia", 'BC', 39);
 INSERT INTO state(name, code, country_id) VALUES ("Manitoba", 'MB', 39);
@@ -346,6 +345,39 @@ INSERT INTO state(name, code, country_id) VALUES ("Quebec", 'QC', 39);
 INSERT INTO state(name, code, country_id) VALUES ("Saskatchewan", 'SK', 39);
 INSERT INTO state(name, code, country_id) VALUES ("Yukon Territory", 'YT', 39); 
 
+-- Dominican Republic
+INSERT INTO state(name, code, country_id) VALUES ("Azua", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Baoruco", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Barahona", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Dajabón", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Distrito Nacional", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Duarte", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Elías Piña", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("El Seibo", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Espaillat", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Hato Mayor", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Hermanas Mirabal", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Independencia", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("La Altagracia", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("La Romana", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("La Vega", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("María Trinidad Sánchez", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Monseñor Nouel", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Monte Cristi", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Monte Plata", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Pedernales", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Peravia", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Puerto Plata", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Samaná", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Sánchez Ramírez", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("San Cristóbal", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("San José de Ocoa", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("San Juan", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("San Pedro de Macorís", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Santiago", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Santiago Rodríguez", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Santo Domingo", '', 62);
+INSERT INTO state(name, code, country_id) VALUES ("Valverde", '', 62); 
 
 -- city (deprecated)
 -- Alabama

@@ -14,3 +14,13 @@ export const getCustomers = async () => {
   const result = await axios(`${API_URL}\\customers`);
   return result.data;
 };
+
+export const getCountries = async () => {
+  const result  = await axios(`${API_URL}\\countries`);
+  return result.data;
+}
+
+export const getStatesByCountryId = async (countryId) => {
+  const result = await axios(`${API_URL}\\countries\\${countryId}\\states`);
+  return result.data;
+};

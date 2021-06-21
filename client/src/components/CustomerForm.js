@@ -18,6 +18,7 @@ function CustomerForm(props) {
     e.preventDefault();
     props.onSubmitClick();
   }
+
   return (
     <Row>
       <Form>

@@ -17,7 +17,7 @@ class CustomerController extends Controller {
     $response = [
       'data' => $data
     ];
-    $this->jsonResponse($data);
+    $this->jsonResponse($response);
   }
 
   public function view($id) {
