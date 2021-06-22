@@ -42,6 +42,8 @@ class Customer {
     $stmt = $this->db->run(
       'INSERT INTO customer_address (customer_id, address_id) VALUES (:customerId, :addressId)',
       ['customerId' => $customerId, 'addressId' =>$addressId]);
+
+    return $stmt->rowCount();
   }
 
   public function update($id, $data) {

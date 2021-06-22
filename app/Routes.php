@@ -34,12 +34,17 @@ Router::add('/customers/:id', [
   'action' => 'delete'
 ]);
 
+Router::add('/customers/:id/addresses', [
+  'method' => 'post',
+  'controller' => 'CustomerController',
+  'action' => 'addAddress'
+]);
+
 Router::add('/addresses', [
   'method' => 'get',
   'controller' => 'AddressController',
   'action' => 'index'
 ]);
-
 
 Router::add('/addresses', [
   'method' => 'post',

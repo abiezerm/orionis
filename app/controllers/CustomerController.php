@@ -54,6 +54,25 @@ class CustomerController extends Controller {
     }
   }
 
+  public function addAddress() {
+    $_POST = $this->getJSONBodyData();
+
+    if (!empty($_POST['customerId']) && !empty($_POST['addressId'])) {
+      try {
+        $rowCount = $this->customerModel->insertAddress($_POST['customerId'], $_POST['addressId']);
+        $this->createJSONResponse([
+          'message' => 'success inserting address to the customer'
+        ]);
+      } catch(\PDOException $e) {
+        $this->createJSONResponse([
+          'error' => 'Something went wrong'
+        ]);
+      }
+    } else {
+      $this->invalidInputJsonResponse();
+    }
+  }
+
   public function edit($id) {
     $putData = $this->getJSONBodyData();
 
