@@ -278,22 +278,8 @@ function CustomerCRUD(props) {
     }
   ];
 
-  // const data = [{ id: 1, title: 'Conan the Barbarian', year: '1982'},  { id: 1, title: 'War of Somalia', year: '1982'}];
-  // const columns = [
-  //   {
-  //     name: 'Title',
-  //     selector: 'title',
-  //     sortable: true,
-  //   },
-  //   {
-  //     name: 'Year',
-  //     selector: 'year',
-  //     sortable: true,
-  //   },
-  // ];
-
   return (
-    <>
+    <div style={{marginTop: '30px'}}>
       {isLoading
         ? <Spinner animation="border" />
         :
@@ -325,13 +311,13 @@ function CustomerCRUD(props) {
             data={customersData}
           />
 
-          <AddressForm 
+          {/* <AddressForm 
             formValues={addressForm}
             onSubmitClick={handleAddressFormSubmit}
             onInputChange={handleAddressFormInputChange}
             countries={countriesData}
             states={statesData}
-          />
+          /> */}
 
           <CustomerAddressesModal 
             show={showCustomerAddressesModal}
@@ -342,7 +328,7 @@ function CustomerCRUD(props) {
       } 
 
       {isError && <div>Something went wrong ...</div>}
-    </>
+    </div>
   );
 }
 
