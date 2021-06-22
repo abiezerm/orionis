@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import CustomerForm from './CustomerForm';
 import AddressForm from './AddressForm';
+import CustomerAddressesModal from './CustomerAddressesModal';
 import * as APIUtils from '../api/APIUtils';
 import Datatable from 'react-data-table-component';
 
@@ -19,6 +20,8 @@ function CustomerCRUD(props) {
   const [showAddCustomerForm, setShowAddCustomerForm] = useState(false);
   const [showEditCustomerForm, setShowEditCustomerForm] = useState(false);
   const [showAddressForm, setShowAddressForm] = useState(false);
+  const [showCustomerAddressesModal, setShowCustomerAddressesModal] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState({addresses: []});
 
   const [customerForm, setCustomerForm] = useState({
     firstname: '',
@@ -184,6 +187,14 @@ function CustomerCRUD(props) {
     setShowAddressForm(false);
   }
 
+  async function handleShowCustomerAddresses(e) {
+    const id = e.target.id;
+    const record = await APIUtils.getCustomerById(id);
+
+    setSelectedRecord(record);
+    setShowCustomerAddressesModal(true);
+  }
+
   function validateForm(form) {
     const inputs = form;
     const errors = {};
@@ -249,7 +260,7 @@ function CustomerCRUD(props) {
     },
     {
       cell: (row) => (
-        <Button id={row.id}>Addresses</Button>
+        <Button id={row.id} onClick={handleShowCustomerAddresses}>Addresses</Button>
       ),
       button: true
     },
@@ -308,7 +319,6 @@ function CustomerCRUD(props) {
             onDateInputChange={handleCustomerFormDateInputChange} 
           />
 
-
           <Datatable 
             title="Customers"
             columns={customerDatatableColumns}
@@ -323,7 +333,11 @@ function CustomerCRUD(props) {
             states={statesData}
           />
 
-          
+          <CustomerAddressesModal 
+            show={showCustomerAddressesModal}
+            onCloseClick={() => setShowCustomerAddressesModal(false)}
+            selectedRecord={selectedRecord}
+          /> 
         </>
       } 
 
